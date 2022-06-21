@@ -5,6 +5,7 @@ import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.slider.Slider
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +13,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // trage die ID des Buttons hier ein
-        var playButton = findViewById<ImageButton>(/** <ButtonId> **/)
+
+        var playButton = findViewById<ImageButton>(R.id.play_button)
         playButton.setOnClickListener {
             createSongText()
         }
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         // Statement zurück
         // nutze hierfür die .checkedRadioButtonId der RadioGroup
 
+
         return 0
     }
 
@@ -36,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         //TODO speichere die Value des Sliders in einer Variable und gib diese im return
         // Statement zurück
         // nutze hierfür die .value des Sliders
+        val seekBar = findViewById<Slider>(R.id.slider).value
+
 
         return 0f
     }
@@ -58,12 +63,15 @@ class MainActivity : AppCompatActivity() {
     fun createSongString(genreVerse: String, genreChorus: String, songLength: Int): String {
         //TODO Füge Verse und Refrain zusammen und wiederhole den Songtext (songLength) - mal
         // mittels .repeat(ANZAHL) kann ein String wiederholt werden
+        var songText = (genreVerse + genreChorus).repeat(2).repeat(songLength) + genreVerse
+
 
         // TODO speichere einen zusammengesetzten String in einer Variable und gib dies
         //  im return Statement zurück
         //  der String setzt sich wie folgt zusammen (verse + chorus.repeat(3)).repeat(length)
         //  mittels .repeat(Int) lässt sich ein String wiederholen
-        return ""
+
+        return songText
     }
 
 
@@ -74,15 +82,22 @@ class MainActivity : AppCompatActivity() {
     fun createSongText() {
 
         // TODO Lese die Textfelder aus und speichere die Strings in  Variablen
+        var textAins = findViewById<EditText>(R.id.text_feld_1)
+        var inhaltAins = textAins.text.toString()
 
         // TODO Lese das Genre aus speichere den String in einer Variable
         //  (getGenreFromRadios())
+        var text2 = findViewById<EditText>(R.id.text_feld_2)
+        var inhalt2 = textAins.text.toString()
 
         // TODO Lese die Songlänge aus speichere den Integer in einer Variable
         //  (getSongLength())
+        var inhalt3 = findViewById<EditText>(R.id.text_feld_3).text.toString()
 
         // TODO speichere je nach Genre die richtigen Strings in Variablen für verse und chorus
         //  erstelle hierfür eine when Bedingung und lade je nach RadioButtonId die richtigen Strings mittels getString(STRINGID)
+        var popchorus = getString(R.string.pop_chorus, inhaltAins, inhalt2, inhalt3)
+        var popverse = getString(R.string.pop_verse,inhaltAins)
 
 
 
@@ -90,8 +105,14 @@ class MainActivity : AppCompatActivity() {
         // Ergebniss in einer Variable speichern
         // createSongString()
 
+        var fertigerSongtext = createSongString(popverse,popchorus, 1)
+        findViewById<TextView>(R.id.text_feld_2).text = fertigerSongtext
+
+
 
         // TODO zu guter letzt setze die .text deiner Ausgabe TextView auf den den SongString
+        findViewById<TextView>(R.id.song_text).text = fertigerSongtext
+
 
 
         // nutzte <TextView>.setMovementMethod(ScrollingMovementMethod()), um TextView scrollable zu machen

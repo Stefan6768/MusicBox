@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Musik Box</string>
-    <string name="pop_verse"> </string>
-    <string name="pop_chorus"></string>
+    <string name="pop_verse"> Liebe %1$s es ist Sommer</string>
+    <string name="pop_chorus"> %1$s und wir geniessen unser Leben %2$s lass uns tanzen %3$s in der Sonne</string>
     <string name="rap_verse"></string>
     <string name="rap_chorus"></string>
     <string name="folk_verse"></string>
